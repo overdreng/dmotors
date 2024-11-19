@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Sales</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">DRENG MOTORS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="main.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Sell My Car</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cars.html">Car Inventory</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="max-w-7xl mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-4">Car Sales</h1>
+
+        <div class="flex flex-wrap justify-between mb-4">
+            <!-- Фильтры остаются как в предыдущем коде -->
+            <div class="w-full md:w-1/2 xl:w-1/3 mb-4 md:mb-0">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="year">Year</label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="year" type="number" placeholder="Enter Year" />
+            </div>
+            <div class="w-full md:w-1/2 xl:w-1/3 mb-4 md:mb-0">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Price</label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="price" type="number" placeholder="Max Price" />
+            </div>
+            <div class="w-full md:w-1/2 xl:w-1/3 mb-4 md:mb-0">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="brand">Brand</label>
+                <select
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="brand">
+                    <option value="">All</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Bugatti">Bugatti</option>
+                    <option value="Lamborghini">Lamborghini</option>
+                </select>
+            </div>
+            <div class="w-full md:w-1/2 xl:w-1/3 mb-4 md:mb-0">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="bodyType">Body Type</label>
+                <select
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="bodyType">
+                    <option value="">All</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="Supercar">Supercar</option>
+                </select>
+            </div>
+            <div class="w-full md:w-1/2 xl:w-1/3 mb-4 md:mb-0">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="mileage">Mileage</label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="mileage" type="number" placeholder="Max Mileage" />
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onclick="handleFilter()">Filter</button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="carList">
+            <!-- Карточки автомобилей будут отображаться здесь -->
+        </div>
+    </div>
+
+    <script>
+        const cars = [
+            { id: 1, brand: 'BMW', model: 'M8', year: 2022, price: 130000, bodyType: 'Coupe', mileage: 10000, image: 'https://via.placeholder.com/300?text=BMW+M8' },
+            { id: 2, brand: 'Mercedes', model: 'GT Black Series', year: 2021, price: 160000, bodyType: 'Sedan', mileage: 15000, image: 'https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1713947363611-blob&w=640&q=75' },
+            { id: 3, brand: 'Ferrari', model: 'LaFerrari', year: 2020, price: 2800000, bodyType: 'Supercar', mileage: 5000, image: 'https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1713884443867-blob&w=640&q=75' },
+            { id: 4, brand: 'Bugatti', model: 'Chiron', year: 2019, price: 3000000, bodyType: 'Supercar', mileage: 8000, image: 'https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1708774218475-blob&w=640&q=75' },
+            { id: 5, brand: 'Lamborghini', model: 'Revuelto', year: 2023, price: 2100000, bodyType: 'Supercar', mileage: 2000, image: 'https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fcars%2F1727369624897-blob&w=640&q=75' },
+        ];
+
+        function displayCars(filteredCars) {
+            const carList = document.getElementById('carList');
+            carList.innerHTML = '';
+
+            filteredCars.forEach(car => {
+                const carItem = document.createElement('div');
+                carItem.className = 'bg-white shadow-lg rounded-lg overflow-hidden';
+                carItem.innerHTML = `
+        <img class="w-full h-48 object-cover" src="${car.image}" alt="${car.brand} ${car.model}">
+        <div class="p-4">
+          <h2 class="text-lg font-bold mb-2">${car.brand} ${car.model}</h2>
+          <p class="text-gray-700 text-sm mb-2">Year: ${car.year}</p>
+          <p class="text-gray-700 text-sm mb-2">Price: $${car.price.toLocaleString()}</p>
+          <p class="text-gray-700 text-sm mb-2">Body Type: ${car.bodyType}</p>
+          <p class="text-gray-700 text-sm mb-2">Mileage: ${car.mileage.toLocaleString()} miles</p>
+        </div>
+      `;
+                carList.appendChild(carItem);
+            });
+        }
+
+        function handleFilter() {
+            const year = document.getElementById('year').value;
+            const price = document.getElementById('price').value;
+            const brand = document.getElementById('brand').value;
+            const bodyType = document.getElementById('bodyType').value;
+            const mileage = document.getElementById('mileage').value;
+
+            const filteredCars = cars.filter(car => {
+                return (
+                    (year === '' || car.year === parseInt(year)) &&
+                    (price === '' || car.price <= parseInt(price)) &&
+                    (brand === '' || car.brand === brand) &&
+                    (bodyType === '' || car.bodyType === bodyType) &&
+                    (mileage === '' || car.mileage <= parseInt(mileage))
+                );
+            });
+
+            displayCars(filteredCars);
+        }
+
+        // Display all cars initially
+        displayCars(cars);
+    </script>
+
+</body>
+
+</html>
